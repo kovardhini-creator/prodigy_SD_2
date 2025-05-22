@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guessing Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+      background-color: #f0f0f0;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Number Guessing Game</h1>
+  <p>Guess a number between 1 and 100</p>
+  <input type="number" id="userGuess" min="1" max="100">
+  <button onclick="checkGuess()">Guess</button>
+  <p id="feedback"></p>
+  <p id="attempts">Attempts: 0</p>
 
+  <script>
+    const targetNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+      const userGuess = parseInt(document.getElementById('userGuess').value);
+      attempts++;
+      if (userGuess === targetNumber) {
+        document.getElementById('feedback').innerText = `Correct! The number was ${targetNumber}.`;
+      } else if (userGuess > targetNumber) {
+        document.getElementById('feedback').innerText = "Too high! Try again.";
+      } else {
+        document.getElementById('feedback').innerText = "Too low! Try again.";
+      }
+      document.getElementById('attempts').innerText = `Attempts: ${attempts}`;
+    }
+  </script>
+</body>
+</html>
