@@ -5,41 +5,110 @@
   <title>Guessing Game</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      padding-top: 50px;
+      padding: 50px;
+      margin: 0;
       background-color: #f0f0f0;
+      transition: background-color 0.5s;
     }
-    input, button {
-      padding: 10px;
+
+    h1 {
+      color: #333;
+    }
+
+    input, button, select {
+      padding: 12px;
       margin: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #feedback {
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    #attempts {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .color-select {
+      margin-top: 30px;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 14px;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <h1>Number Guessing Game</h1>
-  <p>Guess a number between 1 and 100</p>
-  <input type="number" id="userGuess" min="1" max="100">
-  <button onclick="checkGuess()">Guess</button>
+
+  <h1>Guess the Number!</h1>
+  <p>I'm thinking of a number between <strong>1 and 100</strong>.</p>
+  <input type="number" id="userGuess" min="1" max="100" placeholder="Enter your guess">
+  <button onclick="checkGuess()">Submit Guess</button>
+
   <p id="feedback"></p>
   <p id="attempts">Attempts: 0</p>
+
+  <div class="color-select">
+    <h3>Change Background Color:</h3>
+    <select id="colorPicker" onchange="changeColor()">
+      <option value="#f0f0f0">Default</option>
+      <option value="#ffe6e6">Soft Pink</option>
+      <option value="#e6f7ff">Light Blue</option>
+      <option value="#e6ffe6">Mint Green</option>
+      <option value="#fff5cc">Pale Yellow</option>
+      <option value="#f9e6ff">Lavender</option>
+    </select>
+  </div>
+
+  <footer>
+    Task-02 | Prodigy Infotech Internship
+  </footer>
 
   <script>
     const targetNumber = Math.floor(Math.random() * 100) + 1;
     let attempts = 0;
 
     function checkGuess() {
-      const userGuess = parseInt(document.getElementById('userGuess').value);
+      const guess = parseInt(document.getElementById('userGuess').value);
       attempts++;
-      if (userGuess === targetNumber) {
-        document.getElementById('feedback').innerText = `Correct! The number was ${targetNumber}.`;
-      } else if (userGuess > targetNumber) {
-        document.getElementById('feedback').innerText = "Too high! Try again.";
-      } else {
-        document.getElementById('feedback').innerText = "Too low! Try again.";
+      let feedback = "";
+
+      if (guess === targetNumber) {
+        feedback = `Congratulations! You guessed it right. The number was ${targetNumber}.`;
+      } else if (guess > targetNumber) {
+        feedback = "Too high! Try again.";
+      } else if (guess < targetNumber) {
+        feedback = "Too low! Try again.";
       }
-      document.getElementById('attempts').innerText = `Attempts: ${attempts}`;
+
+      document.getElementById("feedback").innerText = feedback;
+      document.getElementById("attempts").innerText = `Attempts: ${attempts}`;
+    }
+
+    function changeColor() {
+      const color = document.getElementById("colorPicker").value;
+      document.body.style.backgroundColor = color;
     }
   </script>
+
 </body>
 </html>
