@@ -45,6 +45,7 @@ A modern web browser (Chrome, Firefox, Edge, Safari, etc.)
  Feedback: "Congratulations! You guessed it right. The number was 63."
 
 📂 File Information
+
  ~ index.html – Main HTML file containing the game structure and script
 
  ~ Embedded CSS styles for layout and design
